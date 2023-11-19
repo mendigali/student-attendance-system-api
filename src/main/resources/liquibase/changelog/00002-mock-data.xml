@@ -1,0 +1,72 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="mendigalitemir13@gmail.com" id="00002">
+        <sql>
+            insert into users (id, email, password, role)
+            values (1001, 'abdullaeva@iitu.edu.kz', '123456', 'TEACHER'),
+                   (1002, 'kydyrbekuly@iitu.edu.kz', '123456', 'TEACHER'),
+                   (1003, 'bektemyssova@iitu.edu.kz', '123456', 'TEACHER'),
+                   (1004, 'tukenova@iitu.edu.kz', '123456', 'TEACHER'),
+                   (1005, 'atymtayeva@iitu.edu.kz', '123456', 'TEACHER'),
+                   (1006, '38532@iitu.edu.kz', '38532', 'STUDENT'),
+                   (1007, '38516@iitu.edu.kz', '38516', 'STUDENT'),
+                   (1008, '38520@iitu.edu.kz', '38520', 'STUDENT');
+
+            insert into teachers (id, full_name, user_id)
+            values
+                (1001, 'Abdullaeva G.', 1001),
+                (1002, 'Кydyrbekuly D.', 1002),
+                (1003, 'Bektemyssova G.', 1003),
+                (1004, 'Tukenova L.M.', 1004),
+                (1005, 'Atymtayeva L.', 1005);
+
+            insert into groups (id, name)
+            values (101, 'SE-231M'),
+                   (102, 'SE-232M');
+
+            insert into students (id, full_name, user_id, group_id)
+            values (1006, 'Temir Mendigali', 1006, 101),
+                   (1007, 'Altair Alimzhanov', 1007, 101),
+                   (1008, 'Yelzhas Abdikali', 1008, 102);
+
+            insert into classrooms (id, number, floor)
+            values (101, '700', 7),
+                   (102, '702', 7),
+                   (103, '705', 7),
+                   (104, '707', 7),
+                   (105, '800', 8),
+                   (106, '901', 9),
+                   (107, '905', 9);
+
+            insert into courses (id, name, teacher_id)
+            values (101, 'High School of Pedagogy', 1001),
+                   (102, 'History and philosophy of science', 1002),
+                   (103, 'Research Methodology', 1003),
+                   (104, 'Geographic Information Systems', 1004),
+                   (105, 'Software Development Management and Reengineering', 1005);
+
+            insert into schedules (group_id, course_id, classroom_id, timestamp)
+            values
+                -- понедельник
+                (101, 101, 106, '2023-11-13 18:30:00'),
+                (101, 102, 106, '2023-11-13 19:30:00'),
+                (101, 101, 107, '2023-11-13 20:30:00'),
+                (101, 102, 107, '2023-11-13 21:30:00'),
+                -- вторник
+                (101, 103, 105, '2023-11-14 18:30:00'),
+                (101, 103, 104, '2023-11-14 19:30:00'),
+                (101, 103, 104, '2023-11-14 20:30:00'),
+                -- среда
+                (101, 104, 101, '2023-11-15 18:30:00'),
+                (101, 104, 103, '2023-11-15 19:30:00'),
+                (101, 104, 103, '2023-11-15 20:30:00'),
+                (101, 104, 103, '2023-11-15 21:30:00'),
+                -- четверг
+                (101, 105, 101, '2023-11-16 18:30:00'),
+                (101, 105, 102, '2023-11-16 19:30:00'),
+                (101, 105, 102, '2023-11-16 20:30:00');
+        </sql>
+    </changeSet>
+</databaseChangeLog>
