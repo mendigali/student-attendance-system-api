@@ -109,6 +109,7 @@
     </dependencies>
 
     <build>
+        <finalName>student-attendance-system-api</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

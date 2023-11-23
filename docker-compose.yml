@@ -11,3 +11,20 @@ services:
       - POSTGRES_USER=mytestuser
       - POSTGRES_PASSWORD=123456
       - POSTGRES_DB=student_attendance_system_db
+    networks:
+      - student-attendance-system-api-network
+
+  spring-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    networks:
+      - student-attendance-system-api-network
+
+networks:
+  student-attendance-system-api-network:
+    driver: bridge
