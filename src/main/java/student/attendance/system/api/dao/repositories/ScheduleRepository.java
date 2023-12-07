@@ -120,16 +120,13 @@ public class ScheduleRepository {
                     "JOIN classrooms ON schedules.classroom_id = classrooms.id " +
                     "JOIN groups ON schedules.group_id = groups.id " +
                     "WHERE groups.id = :groupId " +
-                    "      AND schedules.timestamp < :currentLocalDateTime " +
-                    "      AND (schedules.timestamp + INTERVAL '50 minutes') > :currentLocalDateTime " +
+                    "      AND schedules.timestamp < CURRENT_TIMESTAMP " +
+                    "      AND (schedules.timestamp + INTERVAL '50 minutes') > CURRENT_TIMESTAMP " +
                     "ORDER BY schedules.timestamp " +
                     "LIMIT 1";
 
             Map<String, Object> paramsMap = new HashMap<>();
             paramsMap.put("groupId", groupId);
-
-            LocalDateTime currentLocalDateTime = LocalDateTime.now();
-            paramsMap.put("currentLocalDateTime", currentLocalDateTime);
 
             return namedParameterJdbcTemplate.queryForObject(query, paramsMap, new ScheduleRowMapper());
         } catch (EmptyResultDataAccessException e) {
