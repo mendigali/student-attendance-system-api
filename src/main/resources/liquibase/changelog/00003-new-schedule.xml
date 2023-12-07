@@ -2,7 +2,7 @@
 <databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet author="mendigalitemir13@gmail.com" id="00002">
+    <changeSet author="mendigalitemir13@gmail.com" id="00003">
         <sql>
             insert into schedules (group_id, course_id, classroom_id, timestamp)
             values
