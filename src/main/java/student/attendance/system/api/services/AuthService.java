@@ -1,7 +1,10 @@
 package student.attendance.system.api.services;
 
 import lombok.RequiredArgsConstructor;
+import student.attendance.system.api.dao.entities.StudentEntity;
+import student.attendance.system.api.dao.entities.TeacherEntity;
 import student.attendance.system.api.dao.entities.UserEntity;
+import student.attendance.system.api.dao.repositories.StudentRepository;
 import student.attendance.system.api.dao.repositories.UserRepository;
 import student.attendance.system.api.exceptions.APIBadRequestException;
 import student.attendance.system.api.models.requests.AuthRegisterStudentRequest;
@@ -19,6 +22,7 @@ import java.util.Base64;
 public class AuthService {
 
     private final UserRepository userRepository;
+    private final StudentRepository studentRepository;
 
     public AuthLoginResponse authLogin(AuthSigninRequest request) throws APIBadRequestException {
         if (!userRepository.existsByEmail(request.getEmail())) {
@@ -75,6 +79,15 @@ public class AuthService {
 
         user = userRepository.findByEmail(request.getEmail());
 
+        StudentEntity student = new StudentEntity(
+                null,
+                request.getFullName(),
+                user.getId(),
+                request.getGroupId()
+        );
+
+        studentRepository.save(student);
+
         return new AuthRegisterResponse(token, user);
     }
 
@@ -95,6 +108,12 @@ public class AuthService {
         String token = Base64.getEncoder().encodeToString((user.getEmail() + ":" + user.getPassword()).getBytes());
 
         user = userRepository.findByEmail(request.getEmail());
+
+        TeacherEntity teacher = new TeacherEntity(
+                null,
+                request.getFullName(),
+                user.getId()
+        );
 
         return new AuthRegisterResponse(token, user);
     }

@@ -27,11 +27,11 @@ public class AuthController {
         return authService.authLogin(request);
     }
 
-    @Operation(summary = "Register new user")
-    @PostMapping("/register/user")
-    public AuthRegisterResponse authRegisterUser(@Valid @RequestBody AuthRegisterUserRequest request) throws APIBadRequestException {
-        return authService.authRegister(request);
-    }
+//    @Operation(summary = "Register new user")
+//    @PostMapping("/register/user")
+//    public AuthRegisterResponse authRegisterUser(@Valid @RequestBody AuthRegisterUserRequest request) throws APIBadRequestException {
+//        return authService.authRegister(request);
+//    }
 
     @Operation(summary = "Register new student")
     @PostMapping("/register/student")

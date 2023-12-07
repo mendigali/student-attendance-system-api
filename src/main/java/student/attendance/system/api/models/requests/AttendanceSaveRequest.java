@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class AttendanceSaveRequest {
 
-    private Integer scheduleId;
+    private String email;
 }

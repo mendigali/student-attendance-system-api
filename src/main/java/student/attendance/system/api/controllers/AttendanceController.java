@@ -20,8 +20,8 @@ public class AttendanceController {
 
     @Operation(summary = "Save student attendance")
     @PostMapping("/save")
-    public NullResponse postAttendanceSave(@RequestBody AttendanceSaveRequest request, Principal principal) throws APIException {
-        attendanceService.saveAttendance(UserEntity.fromJson(principal.getName()).getId().intValue(), request.getScheduleId());
+    public NullResponse postAttendanceSave(@RequestBody AttendanceSaveRequest request) throws APIException {
+        attendanceService.saveAttendance(request.getEmail());
         return new NullResponse();
     }
 }

@@ -42,7 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-ui.html",
                         "/swagger-ui/**",
                         "/swagger-ui-custom",
-                        "/auth/**");
+                        "/auth/**",
+                        "/attendance/**",
+                        "/health/**");
     }
 
     @Autowired

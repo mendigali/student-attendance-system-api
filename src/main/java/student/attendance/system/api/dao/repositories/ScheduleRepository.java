@@ -101,4 +101,40 @@ public class ScheduleRepository {
             throw e;
         }
     }
+
+    public Schedule getScheduleForNow(Integer groupId) {
+        try {
+            String query = "SELECT schedules.id AS schedule_id, " +
+                    "              schedules.timestamp AS start_time, " +
+                    "              courses.id AS course_id, " +
+                    "              courses.name AS course_name, " +
+                    "              teachers.id AS teacher_id, " +
+                    "              teachers.full_name AS teacher_name, " +
+                    "              classrooms.id AS classroom_id, " +
+                    "              classrooms.number AS classroom, " +
+                    "              groups.id AS group_id, " +
+                    "              groups.name AS group_name " +
+                    "FROM schedules " +
+                    "JOIN courses ON schedules.course_id = courses.id " +
+                    "JOIN teachers ON courses.teacher_id = teachers.id " +
+                    "JOIN classrooms ON schedules.classroom_id = classrooms.id " +
+                    "JOIN groups ON schedules.group_id = groups.id " +
+                    "WHERE groups.id = :groupId " +
+                    "      AND schedules.timestamp < :currentLocalDateTime " +
+                    "      AND (schedules.timestamp + INTERVAL '50 minutes') > :currentLocalDateTime " +
+                    "ORDER BY schedules.timestamp " +
+                    "LIMIT 1";
+
+            Map<String, Object> paramsMap = new HashMap<>();
+            paramsMap.put("groupId", groupId);
+
+            LocalDateTime currentLocalDateTime = LocalDateTime.now();
+            paramsMap.put("currentLocalDateTime", currentLocalDateTime);
+
+            return namedParameterJdbcTemplate.queryForObject(query, paramsMap, new ScheduleRowMapper());
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
 }
