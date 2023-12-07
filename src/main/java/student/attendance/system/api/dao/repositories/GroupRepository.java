@@ -18,6 +18,6 @@ public class GroupRepository {
     public GroupEntity getById(Integer id) {
         String query = "SELECT * FROM groups WHERE id = ?";
 
-        return jdbcTemplate.queryForObject(query, new GroupEntityRowMapper());
+        return jdbcTemplate.queryForObject(query, new GroupEntityRowMapper(), id);
     }
 }
