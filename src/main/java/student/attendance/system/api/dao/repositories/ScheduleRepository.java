@@ -32,9 +32,8 @@ public class ScheduleRepository {
 
     public List<Schedule> getScheduleForWeek(Integer groupId) {
         try {
-            String query = "SET TIME ZONE 'Asia/Almaty'; " +
-                    "select schedules.id as schedule_id, " +
-                    "              schedules.timestamp as start_time, " +
+            String query = "select schedules.id as schedule_id, " +
+                    "              schedules.timestamp AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Almaty' as start_time, " +
                     "              courses.id as course_id, " +
                     "              courses.name as course_name, " +
                     "              teachers.id as teacher_id, " +
@@ -73,9 +72,8 @@ public class ScheduleRepository {
 
     public List<Schedule> getScheduleForToday(Integer groupId) {
         try {
-            String query = "SET TIME ZONE 'Asia/Almaty'; " +
-                    "select schedules.id as schedule_id, " +
-                    "              schedules.timestamp as start_time, " +
+            String query = "select schedules.id as schedule_id, " +
+                    "              schedules.timestamp AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Almaty' as start_time, " +
                     "              courses.id as course_id, " +
                     "              courses.name as course_name, " +
                     "              teachers.id as teacher_id, " +
@@ -106,9 +104,8 @@ public class ScheduleRepository {
 
     public Schedule getScheduleForNow(Integer groupId) {
         try {
-            String query = "SET TIME ZONE 'Asia/Almaty'; " +
-                    "SELECT schedules.id AS schedule_id, " +
-                    "              schedules.timestamp AS start_time, " +
+            String query = "SELECT schedules.id AS schedule_id, " +
+                    "              schedules.timestamp AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Almaty' AS start_time, " +
                     "              courses.id AS course_id, " +
                     "              courses.name AS course_name, " +
                     "              teachers.id AS teacher_id, " +
