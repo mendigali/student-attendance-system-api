@@ -32,7 +32,8 @@ public class ScheduleRepository {
 
     public List<Schedule> getScheduleForWeek(Integer groupId) {
         try {
-            String query = "select schedules.id as schedule_id, " +
+            String query = "SET TIME ZONE 'Asia/Almaty'; " +
+                    "select schedules.id as schedule_id, " +
                     "              schedules.timestamp as start_time, " +
                     "              courses.id as course_id, " +
                     "              courses.name as course_name, " +
@@ -72,7 +73,8 @@ public class ScheduleRepository {
 
     public List<Schedule> getScheduleForToday(Integer groupId) {
         try {
-            String query = "select schedules.id as schedule_id, " +
+            String query = "SET TIME ZONE 'Asia/Almaty'; " +
+                    "select schedules.id as schedule_id, " +
                     "              schedules.timestamp as start_time, " +
                     "              courses.id as course_id, " +
                     "              courses.name as course_name, " +
@@ -104,7 +106,8 @@ public class ScheduleRepository {
 
     public Schedule getScheduleForNow(Integer groupId) {
         try {
-            String query = "SELECT schedules.id AS schedule_id, " +
+            String query = "SET TIME ZONE 'Asia/Almaty'; " +
+                    "SELECT schedules.id AS schedule_id, " +
                     "              schedules.timestamp AS start_time, " +
                     "              courses.id AS course_id, " +
                     "              courses.name AS course_name, " +
