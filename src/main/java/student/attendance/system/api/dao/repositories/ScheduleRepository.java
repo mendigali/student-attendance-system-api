@@ -33,7 +33,7 @@ public class ScheduleRepository {
     public List<Schedule> getScheduleForWeek(Integer groupId) {
         try {
             String query = "select schedules.id as schedule_id, " +
-                    "              schedules.timestamp AT TIME ZONE 'Asia/Almaty' as start_time, " +
+                    "              schedules.timestamp as start_time, " +
                     "              courses.id as course_id, " +
                     "              courses.name as course_name, " +
                     "              teachers.id as teacher_id, " +
@@ -48,8 +48,8 @@ public class ScheduleRepository {
                     "join classrooms on schedules.classroom_id = classrooms.id " +
                     "join groups on schedules.group_id = groups.id " +
                     "where groups.id = :groupId " +
-                    "and schedules.timestamp AT TIME ZONE 'Asia/Almaty' >= :weekStart AT TIME ZONE 'Asia/Almaty' " +
-                    "and schedules.timestamp AT TIME ZONE 'Asia/Almaty' <= :weekEnd AT TIME ZONE 'Asia/Almaty' " +
+                    "and schedules.timestamp >= :weekStart " +
+                    "and schedules.timestamp <= :weekEnd " +
                     "order by schedules.timestamp";
 
             Map<String, Object> paramsMap = new HashMap<>();
@@ -73,7 +73,7 @@ public class ScheduleRepository {
     public List<Schedule> getScheduleForToday(Integer groupId) {
         try {
             String query = "select schedules.id as schedule_id, " +
-                    "              schedules.timestamp AT TIME ZONE 'Asia/Almaty' as start_time, " +
+                    "              schedules.timestamp as start_time, " +
                     "              courses.id as course_id, " +
                     "              courses.name as course_name, " +
                     "              teachers.id as teacher_id, " +
@@ -87,7 +87,7 @@ public class ScheduleRepository {
                     "join teachers on courses.teacher_id = teachers.id " +
                     "join classrooms on schedules.classroom_id = classrooms.id " +
                     "join groups on schedules.group_id = groups.id " +
-                    "where groups.id = :groupId AND DATE(schedules.timestamp AT TIME ZONE 'Asia/Almaty') = :currentDate AT TIME ZONE 'Asia/Almaty'" +
+                    "where groups.id = :groupId AND DATE(schedules.timestamp) = :currentDate " +
                     "order by schedules.timestamp";
 
             Map<String, Object> paramsMap = new HashMap<>();
@@ -105,7 +105,7 @@ public class ScheduleRepository {
     public Schedule getScheduleForNow(Integer groupId) {
         try {
             String query = "SELECT schedules.id AS schedule_id, " +
-                    "              schedules.timestamp AT TIME ZONE 'Asia/Almaty' AS start_time, " +
+                    "              schedules.timestamp AS start_time, " +
                     "              courses.id AS course_id, " +
                     "              courses.name AS course_name, " +
                     "              teachers.id AS teacher_id, " +
@@ -120,8 +120,8 @@ public class ScheduleRepository {
                     "JOIN classrooms ON schedules.classroom_id = classrooms.id " +
                     "JOIN groups ON schedules.group_id = groups.id " +
                     "WHERE groups.id = :groupId " +
-                    "      AND schedules.timestamp AT TIME ZONE 'Asia/Almaty' < CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Almaty' " +
-                    "      AND (schedules.timestamp AT TIME ZONE 'Asia/Almaty' + INTERVAL '50 minutes') > CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Almaty' " +
+                    "      AND schedules.timestamp < CURRENT_TIMESTAMP " +
+                    "      AND (schedules.timestamp + INTERVAL '50 minutes') > CURRENT_TIMESTAMP " +
                     "ORDER BY schedules.timestamp " +
                     "LIMIT 1";
 
