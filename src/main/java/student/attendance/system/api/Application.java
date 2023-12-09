@@ -9,6 +9,7 @@ import java.util.TimeZone;
 public class Application {
 
     public static void main(String[] args) {
+        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Almaty"));
         TimeZone defaultTimeZone = TimeZone.getDefault();
 
         System.out.println("Default Timezone ID: " + defaultTimeZone.getID());
