@@ -1,7 +1,7 @@
 package student.attendance.system.api.configs;
 
 import com.google.gson.Gson;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,14 +12,12 @@ import student.attendance.system.api.dao.entities.UserEntity;
 import student.attendance.system.api.dao.repositories.UserRepository;
 import student.attendance.system.api.models.UserPrincipal;
 
-import java.util.List;
-
 @Service
+@RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private Gson gson;
+
+    private final UserRepository userRepository;
+    private final Gson gson;
 
     @Override
     public UserDetails loadUserByUsername(String username) {

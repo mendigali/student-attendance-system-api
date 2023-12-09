@@ -1,16 +1,16 @@
 package student.attendance.system.api.services;
 
 import lombok.RequiredArgsConstructor;
-import student.attendance.system.api.dao.entities.StudentEntity;
-import student.attendance.system.api.dao.entities.TeacherEntity;
+import student.attendance.system.api.dao.entities.Student;
+import student.attendance.system.api.dao.entities.Teacher;
 import student.attendance.system.api.dao.entities.UserEntity;
 import student.attendance.system.api.dao.repositories.StudentRepository;
+import student.attendance.system.api.dao.repositories.TeacherRepository;
 import student.attendance.system.api.dao.repositories.UserRepository;
 import student.attendance.system.api.exceptions.APIBadRequestException;
 import student.attendance.system.api.models.requests.AuthRegisterStudentRequest;
 import student.attendance.system.api.models.requests.AuthRegisterTeacherRequest;
-import student.attendance.system.api.models.requests.AuthSigninRequest;
-import student.attendance.system.api.models.requests.AuthRegisterUserRequest;
+import student.attendance.system.api.models.requests.AuthLoginRequest;
 import student.attendance.system.api.models.responses.AuthLoginResponse;
 import student.attendance.system.api.models.responses.AuthRegisterResponse;
 import org.springframework.stereotype.Service;
@@ -23,8 +23,9 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final StudentRepository studentRepository;
+    private final TeacherRepository teacherRepository;
 
-    public AuthLoginResponse authLogin(AuthSigninRequest request) throws APIBadRequestException {
+    public AuthLoginResponse postAuthLogin(AuthLoginRequest request) throws APIBadRequestException {
         if (!userRepository.existsByEmail(request.getEmail())) {
             throw new APIBadRequestException("Error: User doesn't exist!");
         }
@@ -40,28 +41,7 @@ public class AuthService {
         return new AuthLoginResponse(token, user);
     }
 
-    public AuthRegisterResponse authRegister(AuthRegisterUserRequest request) throws APIBadRequestException {
-        if (userRepository.existsByEmail(request.getEmail())) {
-            throw new APIBadRequestException("Error: Email is already taken!");
-        }
-
-        UserEntity user = new UserEntity(
-                null,
-                request.getEmail(),
-                request.getPassword(),
-                request.getRole()
-        );
-
-        userRepository.save(user);
-
-        String token = Base64.getEncoder().encodeToString((user.getEmail() + ":" + user.getPassword()).getBytes());
-
-        user = userRepository.findByEmail(request.getEmail());
-
-        return new AuthRegisterResponse(token, user);
-    }
-
-    public AuthRegisterResponse authRegisterStudent(AuthRegisterStudentRequest request) throws APIBadRequestException {
+    public AuthRegisterResponse postAuthRegisterStudent(AuthRegisterStudentRequest request) throws APIBadRequestException {
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new APIBadRequestException("Error: Email is already taken!");
         }
@@ -79,7 +59,7 @@ public class AuthService {
 
         user = userRepository.findByEmail(request.getEmail());
 
-        StudentEntity student = new StudentEntity(
+        Student student = new Student(
                 null,
                 request.getFullName(),
                 user.getId(),
@@ -91,7 +71,7 @@ public class AuthService {
         return new AuthRegisterResponse(token, user);
     }
 
-    public AuthRegisterResponse authRegisterTeacher(AuthRegisterTeacherRequest request) throws APIBadRequestException {
+    public AuthRegisterResponse postAuthRegisterTeacher(AuthRegisterTeacherRequest request) throws APIBadRequestException {
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new APIBadRequestException("Error: Email is already taken!");
         }
@@ -109,11 +89,13 @@ public class AuthService {
 
         user = userRepository.findByEmail(request.getEmail());
 
-        TeacherEntity teacher = new TeacherEntity(
+        Teacher teacher = new Teacher(
                 null,
                 request.getFullName(),
                 user.getId()
         );
+
+        teacherRepository.save(teacher);
 
         return new AuthRegisterResponse(token, user);
     }

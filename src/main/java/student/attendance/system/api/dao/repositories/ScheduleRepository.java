@@ -12,10 +12,8 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.temporal.WeekFields;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 @Repository
@@ -129,7 +127,6 @@ public class ScheduleRepository {
             paramsMap.put("groupId", groupId);
 
             LocalDateTime currentLocalDateTime = LocalDateTime.now();
-            System.out.println("TODO currentLocalDateTime: " + currentLocalDateTime);
             paramsMap.put("currentLocalDateTime", currentLocalDateTime);
 
             return namedParameterJdbcTemplate.queryForObject(query, paramsMap, new ScheduleRowMapper());

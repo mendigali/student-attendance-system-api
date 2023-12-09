@@ -27,9 +27,9 @@ public class AttendanceService {
             throw new APIBadRequestException("User must be student!");
         }
 
-        StudentEntity student = studentRepository.findByUserId(user.getId());
+        Student student = studentRepository.findByUserId(user.getId());
 
-        GroupEntity group = groupRepository.getById(student.getGroupId());
+        Group group = groupRepository.getById(student.getGroupId());
 
         Schedule currentSchedule = scheduleRepository.getScheduleForNow(student.getGroupId());
 

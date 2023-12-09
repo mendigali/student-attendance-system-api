@@ -5,9 +5,10 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class TeacherEntity {
+public class Student {
 
     private Integer id;
     private String fullName;
     private Integer userId;
+    private Integer groupId;
 }

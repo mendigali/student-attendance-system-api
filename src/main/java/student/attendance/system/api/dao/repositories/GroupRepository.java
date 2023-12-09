@@ -3,8 +3,8 @@ package student.attendance.system.api.dao.repositories;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import student.attendance.system.api.dao.entities.GroupEntity;
-import student.attendance.system.api.dao.rowmappers.GroupEntityRowMapper;
+import student.attendance.system.api.dao.entities.Group;
+import student.attendance.system.api.dao.rowmappers.GroupRowMapper;
 
 @Repository
 public class GroupRepository {
@@ -15,9 +15,9 @@ public class GroupRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public GroupEntity getById(Integer id) {
+    public Group getById(Integer id) {
         String query = "SELECT * FROM groups WHERE id = ?";
 
-        return jdbcTemplate.queryForObject(query, new GroupEntityRowMapper(), id);
+        return jdbcTemplate.queryForObject(query, new GroupRowMapper(), id);
     }
 }

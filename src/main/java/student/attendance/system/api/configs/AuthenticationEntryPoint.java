@@ -14,10 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Spring is using exceptionTranslator.
- * Its default impl will redirect all auth exceptions here (not to @ControllerAdvice).
- */
 @Component
 @RequiredArgsConstructor
 public class AuthenticationEntryPoint extends BasicAuthenticationEntryPoint {

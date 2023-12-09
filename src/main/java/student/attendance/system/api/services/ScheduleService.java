@@ -6,11 +6,8 @@ import student.attendance.system.api.dao.entities.Schedule;
 import student.attendance.system.api.dao.repositories.ScheduleRepository;
 import student.attendance.system.api.models.responses.ScheduleAllResponse;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.WeekFields;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Service

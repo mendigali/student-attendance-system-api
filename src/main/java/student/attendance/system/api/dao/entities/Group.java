@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class GroupEntity {
+public class Group {
 
     private Integer id;
     private String name;

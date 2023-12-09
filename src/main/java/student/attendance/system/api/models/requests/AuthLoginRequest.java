@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.validation.constraints.NotEmpty;
 
 @Data
-public class AuthSigninRequest {
+public class AuthLoginRequest {
 
     @NotEmpty(message = "Username is required")
     private String email;

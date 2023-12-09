@@ -6,8 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import student.attendance.system.api.exceptions.APIBadRequestException;
 import student.attendance.system.api.models.requests.AuthRegisterStudentRequest;
 import student.attendance.system.api.models.requests.AuthRegisterTeacherRequest;
-import student.attendance.system.api.models.requests.AuthSigninRequest;
-import student.attendance.system.api.models.requests.AuthRegisterUserRequest;
+import student.attendance.system.api.models.requests.AuthLoginRequest;
 import student.attendance.system.api.models.responses.AuthLoginResponse;
 import student.attendance.system.api.models.responses.AuthRegisterResponse;
 import student.attendance.system.api.services.AuthService;
@@ -23,25 +22,19 @@ public class AuthController {
 
     @Operation(summary = "Login user")
     @PostMapping("/login")
-    public AuthLoginResponse authLogin(@Valid @RequestBody AuthSigninRequest request) throws APIBadRequestException {
-        return authService.authLogin(request);
+    public AuthLoginResponse postAuthLogin(@Valid @RequestBody AuthLoginRequest request) throws APIBadRequestException {
+        return authService.postAuthLogin(request);
     }
-
-//    @Operation(summary = "Register new user")
-//    @PostMapping("/register/user")
-//    public AuthRegisterResponse authRegisterUser(@Valid @RequestBody AuthRegisterUserRequest request) throws APIBadRequestException {
-//        return authService.authRegister(request);
-//    }
 
     @Operation(summary = "Register new student")
     @PostMapping("/register/student")
-    public AuthRegisterResponse authRegisterStudent(@Valid @RequestBody AuthRegisterStudentRequest request) throws APIBadRequestException {
-        return authService.authRegisterStudent(request);
+    public AuthRegisterResponse postAuthRegisterStudent(@Valid @RequestBody AuthRegisterStudentRequest request) throws APIBadRequestException {
+        return authService.postAuthRegisterStudent(request);
     }
 
     @Operation(summary = "Register new teacher")
     @PostMapping("/register/teacher")
-    public AuthRegisterResponse authRegisterTeacher(@Valid @RequestBody AuthRegisterTeacherRequest request) throws APIBadRequestException {
-        return authService.authRegisterTeacher(request);
+    public AuthRegisterResponse postAuthRegisterTeacher(@Valid @RequestBody AuthRegisterTeacherRequest request) throws APIBadRequestException {
+        return authService.postAuthRegisterTeacher(request);
     }
 }

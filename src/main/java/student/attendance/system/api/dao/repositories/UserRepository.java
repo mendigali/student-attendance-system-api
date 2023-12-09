@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import student.attendance.system.api.dao.rowmappers.UserEntityRowMapper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
