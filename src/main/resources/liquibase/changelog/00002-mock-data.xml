@@ -4,69 +4,104 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
     <changeSet author="mendigalitemir13@gmail.com" id="00002">
         <sql>
+            insert into groups (id, name)
+            values (1001, 'SE-231M'),
+                   (1002, 'SE-232M');
+
             insert into users (id, email, password, role)
             values (1001, 'abdullaeva@iitu.edu.kz', '123456', 'TEACHER'),
                    (1002, 'kydyrbekuly@iitu.edu.kz', '123456', 'TEACHER'),
                    (1003, 'bektemyssova@iitu.edu.kz', '123456', 'TEACHER'),
                    (1004, 'tukenova@iitu.edu.kz', '123456', 'TEACHER'),
                    (1005, 'atymtayeva@iitu.edu.kz', '123456', 'TEACHER'),
-                   (1006, '38532@iitu.edu.kz', '38532', 'STUDENT'),
-                   (1007, '38516@iitu.edu.kz', '38516', 'STUDENT'),
-                   (1008, '38520@iitu.edu.kz', '38520', 'STUDENT');
+                   (1006, 'lkozina@iitu.edu.kz', '123456', 'TEACHER'),
+                   (1007, '38532@iitu.edu.kz', '38532', 'STUDENT'),
+                   (1008, '38516@iitu.edu.kz', '38516', 'STUDENT'),
+                   (1009, '38520@iitu.edu.kz', '38520', 'STUDENT'),
+                   (1010, '38515@iitu.edu.kz', '38515', 'STUDENT'),
+                   (1011, '38533@iitu.edu.kz', '38533', 'STUDENT'),
+                   (1012, '38519@iitu.edu.kz', '38519', 'STUDENT'),
+                   (1013, '38522@iitu.edu.kz', '38522', 'STUDENT');
 
             insert into teachers (id, full_name, user_id)
             values
-                (1001, 'Abdullaeva G.', 1001),
-                (1002, 'Кydyrbekuly D.', 1002),
-                (1003, 'Bektemyssova G.', 1003),
-                (1004, 'Tukenova L.M.', 1004),
-                (1005, 'Atymtayeva L.', 1005);
-
-            insert into groups (id, name)
-            values (101, 'SE-231M'),
-                   (102, 'SE-232M');
+                (1001, 'Abdullaeva Gulzira', 1001),
+                (1002, 'Кydyrbekuly Dulatbek', 1002),
+                (1003, 'Bektemyssova Gulnara', 1003),
+                (1004, 'Tukenova Lyailya Muratbekovna', 1004),
+                (1005, 'Atymtayeva Lyazzat', 1005),
+                (1006, 'Kozina Lyudmila Alexandrovna', 1006);
 
             insert into students (id, full_name, user_id, group_id)
-            values (1006, 'Temir Mendigali', 1006, 101),
-                   (1007, 'Altair Alimzhanov', 1007, 101),
-                   (1008, 'Yelzhas Abdikali', 1008, 102);
+            values (1001, 'Temir Mendigali', 1007, 1001),
+                   (1002, 'Altair Alimzhanov', 1008, 1002),
+                   (1003, 'Yelzhas Abdikali', 1009, 1001),
+                   (1004, 'Kamila Abdugapparova', 1010, 1002),
+                   (1005, 'Assem Moldatayeva', 1011, 1001),
+                   (1006, 'Bolat Abdikadyr', 1012, 1002),
+                   (1007, 'Berik Yeraliyev', 1013, 1001);
 
             insert into classrooms (id, number, floor)
-            values (101, '700', 7),
-                   (102, '702', 7),
-                   (103, '705', 7),
-                   (104, '707', 7),
-                   (105, '800', 8),
-                   (106, '901', 9),
-                   (107, '905', 9);
+            values (1001, '700', 7),
+                   (1002, '702', 7),
+                   (1003, '705', 7),
+                   (1004, '707', 7),
+                   (1005, '800', 8),
+                   (1006, '901', 9),
+                   (1007, '905', 9),
+                   (1008, 'Online', 0);
 
             insert into courses (id, name, teacher_id)
-            values (101, 'High School of Pedagogy', 1001),
-                   (102, 'History and philosophy of science', 1002),
-                   (103, 'Research Methodology', 1003),
-                   (104, 'Geographic Information Systems', 1004),
-                   (105, 'Software Development Management and Reengineering', 1005);
+            values (1001, 'High School of Pedagogy', 1001),
+                   (1002, 'History and philosophy of science', 1002),
+                   (1003, 'Research Methodology', 1003),
+                   (1004, 'Geographic Information Systems', 1004),
+                   (1005, 'Software Development Management and Reengineering', 1005),
+                   (1006, 'Theory and Technology of Blockchain', 1004),
+                   (1007, 'Dynamic Programming, Greedy Algorithms', 1006);
 
             insert into schedules (group_id, course_id, classroom_id, timestamp)
             values
+                -- группа SE-231M
                 -- понедельник
-                (101, 101, 106, '2023-11-27 18:30:00'),
-                (101, 102, 106, '2023-11-27 19:30:00'),
-                (101, 101, 107, '2023-11-27 20:30:00'),
-                (101, 102, 107, '2023-11-27 21:30:00'),
+                (1001, 1001, 1006, '2023-12-04 18:30:00'),
+                (1001, 1002, 1006, '2023-12-04 19:30:00'),
+                (1001, 1001, 1007, '2023-12-04 20:30:00'),
+                (1001, 1002, 1007, '2023-12-04 21:30:00'),
                 -- вторник
-                (101, 103, 105, '2023-11-28 18:30:00'),
-                (101, 103, 104, '2023-11-28 19:30:00'),
-                (101, 103, 104, '2023-11-28 20:30:00'),
+                (1001, 1003, 1005, '2023-12-05 18:30:00'),
+                (1001, 1003, 1004, '2023-12-05 19:30:00'),
+                (1001, 1003, 1004, '2023-12-05 20:30:00'),
                 -- среда
-                (101, 104, 101, '2023-11-29 18:30:00'),
-                (101, 104, 103, '2023-11-29 19:30:00'),
-                (101, 104, 103, '2023-11-29 20:30:00'),
-                (101, 104, 103, '2023-11-29 21:30:00'),
+                (1001, 1004, 1001, '2023-12-06 18:30:00'),
+                (1001, 1004, 1003, '2023-12-06 19:30:00'),
+                (1001, 1004, 1003, '2023-12-06 20:30:00'),
+                (1001, 1004, 1003, '2023-12-06 21:30:00'),
                 -- четверг
-                (101, 105, 101, '2023-11-30 18:30:00'),
-                (101, 105, 102, '2023-11-30 19:30:00'),
-                (101, 105, 102, '2023-11-30 20:30:00');
+                (1001, 1005, 1001, '2023-12-07 18:30:00'),
+                (1001, 1005, 1002, '2023-12-07 19:30:00'),
+                (1001, 1005, 1002, '2023-12-07 20:30:00'),
+
+                -- группа SE-232M
+                -- понедельник
+                (1002, 1002, 1006, '2023-12-04 18:30:00'),
+                (1002, 1001, 1006, '2023-12-04 19:30:00'),
+                (1002, 1002, 1007, '2023-12-04 20:30:00'),
+                (1002, 1001, 1007, '2023-12-04 21:30:00'),
+                -- вторник
+                (1002, 1004, 1005, '2023-12-05 18:30:00'),
+                (1002, 1004, 1004, '2023-12-05 19:30:00'),
+                (1002, 1004, 1004, '2023-12-05 20:30:00'),
+                (1002, 1004, 1004, '2023-12-05 20:30:00'),
+                -- среда
+                (1002, 1005, 1001, '2023-12-06 18:30:00'),
+                (1002, 1005, 1003, '2023-12-06 19:30:00'),
+                (1002, 1005, 1003, '2023-12-06 20:30:00'),
+                -- четверг
+                (1002, 1004, 1001, '2023-12-07 18:30:00'),
+                (1002, 1004, 1002, '2023-12-07 19:30:00'),
+                (1002, 1004, 1002, '2023-12-07 20:30:00'),
+                (1002, 1004, 1002, '2023-12-07 20:30:00');
         </sql>
     </changeSet>
 </databaseChangeLog>

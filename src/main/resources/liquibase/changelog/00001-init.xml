@@ -12,27 +12,6 @@
                 role     VARCHAR(255) NOT NULL
             );
 
---             CREATE TABLE roles
---             (
---                 id   SERIAL PRIMARY KEY,
---                 name VARCHAR(255) NOT NULL UNIQUE
---             );
-
---             CREATE TABLE users_roles
---             (
---                 user_id INTEGER NOT NULL REFERENCES users (id),
---                 role_id INTEGER NOT NULL REFERENCES roles (id),
---                 PRIMARY KEY (user_id, role_id)
---             );
-
---             CREATE TABLE refresh_tokens
---             (
---                 id          SERIAL PRIMARY KEY,
---                 user_id     INTEGER      NOT NULL REFERENCES users (id),
---                 token       VARCHAR(255) NOT NULL,
---                 expiry_date TIMESTAMP    NOT NULL
---             );
-
             CREATE TABLE groups
             (
                 id   SERIAL PRIMARY KEY,
@@ -85,8 +64,6 @@
                 classroom_id INTEGER   NOT NULL REFERENCES classrooms (id),
                 timestamp    TIMESTAMP NOT NULL
             );
-
-            -- CREATE TYPE attendance_status AS ENUM ('PRESENT', 'ABSENT', 'LATE', 'EXCUSED');
 
             CREATE TABLE attendances
             (
